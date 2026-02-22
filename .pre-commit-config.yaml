@@ -1,0 +1,70 @@
+---
+# Pre-commit Configuration
+# https://pre-commit.com
+#
+# Setup: pip install pre-commit
+# Usage: pre-commit run -a
+# Update: pre-commit autoupdate
+
+repos:
+
+  # Standard hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+      - id: check-json
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: debug-statements
+      - id: requirements-txt-fixer
+
+  # Check for spelling
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        args: ["-L", "noice,nd,hilights,hilight"]
+        exclude: >
+            (?x)^(
+                .*\.txt|
+                .*\.ipynb|
+                .*\.html
+            )$
+
+  # Check shell
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+        files: (\.bashrc|\.bash_profile|\.profile|\.bash_aliases|\.bash_functions)$
+        args: ["--shell=bash", "--exclude=SC1091,SC1090,SC2164,SC2155"]
+
+  # Lua formatting
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: v2.3.1
+    hooks:
+      - id: stylua
+        args: ["--column-width", "80"]
+
+  # Lua linting
+  - repo: https://github.com/luarocks/luacheck
+    rev: v1.2.0
+    hooks:
+      - id: luacheck
+        files: \.lua$
+        args: ["--globals", "vim", "--"]
+
+  # Check for secrets
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+...

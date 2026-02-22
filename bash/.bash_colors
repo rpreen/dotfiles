@@ -1,0 +1,37 @@
+# --------------------------
+# LS_COLORS
+# --------------------------
+
+LS_COLORS="rs=0"
+LS_COLORS="${LS_COLORS}:di=38;5;108"          # directories - green
+LS_COLORS="${LS_COLORS}:ln=38;2;136;184;246"  # symlinks - blue
+LS_COLORS="${LS_COLORS}:mh=38;5;246"          # multi-hardlink - grey
+LS_COLORS="${LS_COLORS}:pi=38;5;246"          # pipes - grey
+LS_COLORS="${LS_COLORS}:so=38;5;221"          # sockets - yellow
+LS_COLORS="${LS_COLORS}:do=38;5;226"          # doors - bright yellow
+LS_COLORS="${LS_COLORS}:bd=38;5;246"          # block devices - grey
+LS_COLORS="${LS_COLORS}:cd=38;5;246"          # char devices - grey
+LS_COLORS="${LS_COLORS}:or=38;5;246"          # orphaned symlinks - grey
+LS_COLORS="${LS_COLORS}:mi=38;5;246"          # missing - grey
+LS_COLORS="${LS_COLORS}:su=48;5;124;38;5;15"  # setuid - red bg
+LS_COLORS="${LS_COLORS}:sg=48;5;22;38;5;15"   # setgid - green bg
+LS_COLORS="${LS_COLORS}:ca=00"                # capabilities
+LS_COLORS="${LS_COLORS}:tw=48;5;64;38;5;0"    # sticky+other-writable
+LS_COLORS="${LS_COLORS}:ow=38;5;235;38;5;14"  # other-writable
+LS_COLORS="${LS_COLORS}:st=48;5;33;38;5;15"   # sticky
+LS_COLORS="${LS_COLORS}:ex=38;5;210"          # executables - salmon
+
+export LS_COLORS
+
+# --------------------------
+# Prompt colours
+# --------------------------
+
+WHITE=$(tput setaf 7)
+YELLOW=$(tput setaf 186)
+RED=$(tput setaf 210)
+BLUE=$(tput setaf 117)
+GREEN=$(tput setaf 108)
+GREEN_2=$(tput setaf 2)
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
