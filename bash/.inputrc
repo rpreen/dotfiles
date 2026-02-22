@@ -1,0 +1,27 @@
+# --------------------------
+# Completion
+# --------------------------
+
+set colored-completion-prefix on
+set colored-stats on
+set completion-ignore-case on
+set completion-map-case on
+set completion-query-items 200
+set mark-symlinked-directories on
+set match-hidden-files off
+set menu-complete-display-prefix on
+set page-completions off
+set show-all-if-ambiguous on
+set skip-completed-text on
+set visible-stats on
+
+# --------------------------
+# Vi mode
+# --------------------------
+
+set editing-mode vi
+
+set keymap vi-insert
+"jj": vi-movement-mode
+"Jj": vi-movement-mode
+"jJ": vi-movement-mode

@@ -1,0 +1,66 @@
+[user]
+    name = Richard Preen
+    email = rpreen@gmail.com
+
+[core]
+    editor = nvim
+    pager = delta
+
+[pull]
+    rebase = true
+
+[push]
+    default = current
+
+[merge]
+    ff = true
+    branchdesc = true
+    conflictStyle = zdiff3
+
+[rebase]
+    autosquash = true
+
+[branch]
+    sort = authordate
+
+[interactive]
+    diffFilter = delta --color-only
+
+[diff]
+    tool = vimdiff
+
+[color]
+    ui = auto
+
+[delta]
+    navigate = true
+    decorations = true
+    line-numbers = true
+    hyperlinks = true
+    side-by-side = true
+    syntax-theme = 1337
+    dark = true
+
+[alias]
+    st = status
+    di = diff
+    co = checkout
+    br = branch
+    sta = stash
+    ci = commit -v
+
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an> %Cgreen(%cr)%Creset' --abbrev-commit
+
+    whobrokeit = !sh -c \"git log --pretty=format:%an $1..$2 | sort | uniq\"
+    undo = reset HEAD~1 --mixed
+
+    prdiff = "!f() { git diff $(git merge-base main \"$1\")..\"$1\"; }; f"
+    prstat = "!f() { git diff --stat $(git merge-base main \"$1\")..\"$1\"; }; f"
+
+    prc = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+
+[rerere]
+    enabled = true
+
+[credential]
+    helper = store
