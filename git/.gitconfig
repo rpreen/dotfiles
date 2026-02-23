@@ -40,6 +40,7 @@
     side-by-side = true
     syntax-theme = 1337
     dark = true
+    wrap-max-lines = unlimited
 
 [alias]
     st = status
