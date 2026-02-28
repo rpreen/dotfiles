@@ -35,7 +35,37 @@ export HISTCONTROL=ignoreboth     # Ignore dupes and commands starting with spac
 # Prompt
 # --------------------------
 
-PS1='\u\[${YELLOW}\]$([ \j -gt 0 ] && echo " (\j)")\[${RESET}\] \[${GREEN}\]\W\[${RESET}\]$(__git_ps1 " \[${BOLD}\]\[${WHITE}\](%s)\[${RESET}\]") \$ '
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWCOLORHINTS=1
+GIT_PS1_SHOWUPSTREAM="auto"
+
+_jobs_prompt() {
+    local j=$(jobs | wc -l)
+    [ "$j" -gt 0 ] && echo " ($j)"
+}
+
+_venv_prompt() {
+    if [ -n "$VIRTUAL_ENV" ]; then
+        local name=$(basename "$VIRTUAL_ENV")
+        if [ "$name" = ".venv" ]; then
+            name=$(basename "$(dirname "$VIRTUAL_ENV")")
+        fi
+        echo "($name) "
+    fi
+}
+
+__git_ps1_colorize_gitstring () {
+    local red=$'\001\e[31m\002'
+    local green=$'\001\e[32m\002'
+    local clear=$'\001\e[0m\002'
+    local white=$'\001\e[1;37m\002'
+    b="$white$b$clear"
+    if [ -n "$c" ]; then c="$white$c$clear"; fi
+    if [ -n "$w" ]; then w="$red$w$clear"; fi
+    if [ -n "$i" ]; then i="$green$i$clear"; fi
+}
+
+PROMPT_COMMAND='__git_ps1 "$(_venv_prompt)\u${YELLOW}$(_jobs_prompt)${RESET} ${GREEN}\W${RESET}" " \$ "'
 
 # --------------------------
 # Aliases
