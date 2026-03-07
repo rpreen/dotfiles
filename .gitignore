@@ -1,0 +1,7 @@
+*.deb
+*.gz
+*.tar
+.venv
+apt-install-local.sh
+lazy-lock.json
+ssh/.ssh/config.d/

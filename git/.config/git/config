@@ -1,0 +1,97 @@
+[user]
+    name = Richard Preen
+    email = rpreen@gmail.com
+    signingKey = ~/.ssh/id_ed25519.pub
+
+[core]
+    editor = nvim
+    pager = delta
+
+[commit]
+    gpgSign = true
+
+[pull]
+    rebase = true
+
+[push]
+    default = current
+
+[merge]
+    ff = true
+    branchdesc = true
+    conflictStyle = zdiff3
+
+[rebase]
+    autosquash = true
+
+[branch]
+    sort = authordate
+
+[interactive]
+    diffFilter = delta --color-only
+
+[diff]
+    tool = vimdiff
+
+[color]
+    ui = auto
+
+[delta]
+    blame-palette = "brightwhite white"
+    dark = true
+    decorations = true
+    file-decoration-style = omit
+    file-modified-label = modified:
+    file-style = blue italic
+    hunk-header-decoration-style = omit
+    hunk-header-file-style = normal bold
+    hunk-header-style = file syntax
+    hyperlinks = true
+    keep-plus-minus-markers = true
+    line-numbers = true
+    line-numbers-left-style = white
+    line-numbers-minus-style = red bold
+    line-numbers-plus-style = green bold
+    line-numbers-right-style = white
+    line-numbers-zero-style = white
+    minus-emph-style = red bold
+    minus-non-emph-style = syntax dim
+    minus-style = red
+    navigate = true
+    plus-emph-style = green bold
+    plus-non-emph-style = syntax dim
+    plus-style = green
+    side-by-side = true
+    syntax-theme = 1337
+    wrap-max-lines = unlimited
+    zero-style = syntax dim
+
+[alias]
+    st = status
+    di = diff
+    co = checkout
+    br = branch
+    sta = stash
+    ci = commit -v
+
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(bold blue)<%an> %Cgreen(%cr)%Creset' --abbrev-commit
+
+    whobrokeit = !sh -c \"git log --pretty=format:%an $1..$2 | sort | uniq\"
+    undo = reset HEAD~1 --mixed
+
+    prdiff = "!f() { git diff $(git merge-base main \"$1\")..\"$1\"; }; f"
+    prstat = "!f() { git diff --stat $(git merge-base main \"$1\")..\"$1\"; }; f"
+
+    prc = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+
+[rerere]
+    enabled = true
+
+[credential]
+    helper = store
+
+[gpg]
+    format = ssh
+
+[gpg "ssh"]
+    allowedSignersFile = ~/.config/git/allowed_signers
