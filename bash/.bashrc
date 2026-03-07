@@ -1,0 +1,143 @@
+# --------------------------
+# Shell Behaviour
+# --------------------------
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# Enable bash completion
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+shopt -s globstar                 # Recursive globs with **
+shopt -s checkwinsize             # Update window size after commands
+shopt -s cdspell                  # Auto-correct minor typos in cd commands
+shopt -s dirspell                 # Auto-correct directory names in completion
+shopt -s nocaseglob               # Case-insensitive globbing
+
+shopt -s histappend               # Append to history instead of overwriting
+export HISTSIZE=10000             # More history in memory
+export HISTFILESIZE=20000         # More history in file
+export HISTCONTROL=ignoreboth     # Ignore dupes and commands starting with space
+
+# --------------------------
+# Colours
+# --------------------------
+
+[ -f ~/.bash_colors ] && source ~/.bash_colors
+
+# --------------------------
+# Prompt
+# --------------------------
+
+GIT_PS1_SHOWCOLORHINTS=1
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWUPSTREAM="auto"
+
+_jobs_prompt() {
+    local j=$(jobs | wc -l)
+    [ "$j" -gt 0 ] && echo " ($j)"
+}
+
+_venv_prompt() {
+    if [ -n "$VIRTUAL_ENV" ]; then
+        local name=$(basename "$VIRTUAL_ENV")
+        if [ "$name" = ".venv" ]; then
+            name=$(basename "$(dirname "$VIRTUAL_ENV")")
+        fi
+        echo "($name) "
+    fi
+}
+
+_capture_exit() {
+    _last_exit=$?
+}
+
+_exit_prompt() {
+    if [ "$_last_exit" -eq 0 ]; then
+        echo "${GREEN}\$${RESET}"
+    else
+        echo "${RED}\$${RESET}"
+    fi
+}
+
+__git_ps1_colorize_gitstring() {
+    b="${BOLD}${WHITE}${b}${RESET}"
+    if [ -n "$c" ]; then c="${WHITE}${c}${RESET}"; fi
+    if [ -n "$w" ]; then w="${RED}${w}${RESET}"; fi
+    if [ -n "$i" ]; then i="${GREEN_2}${i}${RESET}"; fi
+    if [ -n "$r" ]; then r="${YELLOW}${r}${RESET}"; fi
+}
+
+PROMPT_COMMAND='_capture_exit; __git_ps1 "$(_venv_prompt)\u${YELLOW}$(_jobs_prompt)${RESET} ${GREEN}\W${RESET}" " $(_exit_prompt) "'
+
+# --------------------------
+# Aliases
+# --------------------------
+
+alias ls='ls --color=auto'
+alias ll='ls -lh --color=auto'
+alias la='ls -A --color=auto'
+alias l='ls -CF --color=auto'
+
+alias bat="batcat"
+alias vimdiff='nvim -d'
+alias vim='nvim'
+
+# --------------------------
+# Environment
+# --------------------------
+
+source "$HOME/.secrets"
+
+export EDITOR=nvim
+export VISUAL=nvim
+
+GPG_TTY=$(tty)
+export GPG_TTY
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/nvim/bin:$PATH"
+
+# fzf fuzzy finder
+eval "$(fzf --bash)"
+
+# fzf preview with bat
+export FZF_DEFAULT_OPTS='
+  --height 70%
+  --layout=reverse
+  --border
+  --preview "batcat --color=always --style=numbers --line-range=:500 {}"
+  --preview-window=right:50%
+  --bind ctrl-/:toggle-preview
+  --bind ctrl-b:preview-page-up
+  --bind ctrl-f:preview-page-down
+  '
+
+# fast change directory
+eval "$(zoxide init bash)"
+
+# yazi file browser
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+# Conda initialisation
+if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+    . "$HOME/miniconda3/etc/profile.d/conda.sh"
+    # conda auto-activate base
+    # conda activate base
+else
+    export PATH="$HOME/miniconda3/bin:$PATH"
+fi
