@@ -4,19 +4,26 @@ return {
 	dependencies = {
 		{
 			"mason-org/mason-lspconfig.nvim",
-			opts = {
-				ensure_installed = { "pyright", "ruff", "clangd", "texlab" },
-				automatic_installation = true,
-				automatic_enable = true,
-			},
 			dependencies = {
 				{ "mason-org/mason.nvim", opts = {} },
 			},
+			config = function()
+				local servers = { "ruff", "clangd", "texlab" }
+
+				if vim.fn.executable("node") == 1 then
+					table.insert(servers, "pyright")
+				end
+
+				require("mason-lspconfig").setup({
+					ensure_installed = servers,
+					automatic_installation = true,
+					automatic_enable = true,
+				})
+			end,
 		},
 		{ "hrsh7th/cmp-nvim-lsp" },
 	},
 	event = { "BufReadPre", "BufNewFile" },
-
 	config = function()
 		-- Pyright types and completion
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
