@@ -42,7 +42,7 @@ GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM="auto"
 
 _userhost() {
-    echo "${GREEN}\u@\h${RESET}:${YELLOW}\W"
+    echo "${YELLOW}\u@\h${RESET}:${GREEN}\W"
 }
 
 _jobs() {
