@@ -41,12 +41,16 @@ GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM="auto"
 
-_jobs_prompt() {
-    local j=$(jobs | wc -l)
-    [ "$j" -gt 0 ] && echo " ($j)"
+_userhost() {
+    echo "${GREEN}\u@\h${RESET}:${YELLOW}\W"
 }
 
-_venv_prompt() {
+_jobs() {
+    local j=$(jobs | wc -l)
+    [ "$j" -gt 0 ] && echo "${GREEN_2} ($j)${RESET}"
+}
+
+_venv() {
     if [ -n "$VIRTUAL_ENV" ]; then
         local name=$(basename "$VIRTUAL_ENV")
         if [ "$name" = ".venv" ]; then
@@ -56,11 +60,11 @@ _venv_prompt() {
     fi
 }
 
-_capture_exit() {
+_capture() {
     _last_exit=$?
 }
 
-_exit_prompt() {
+_exit() {
     if [ "$_last_exit" -eq 0 ]; then
         echo "${GREEN}\$${RESET}"
     else
@@ -76,7 +80,7 @@ __git_ps1_colorize_gitstring() {
     if [ -n "$r" ]; then r="${YELLOW}${r}${RESET}"; fi
 }
 
-PROMPT_COMMAND='_capture_exit; __git_ps1 "$(_venv_prompt)\u${YELLOW}$(_jobs_prompt)${RESET} ${GREEN}\W${RESET}" " $(_exit_prompt) "'
+PROMPT_COMMAND='_capture; __git_ps1 "$(_venv)$(_userhost)$(_jobs)${RESET}" "\n$(_exit) "'
 
 # --------------------------
 # Aliases
