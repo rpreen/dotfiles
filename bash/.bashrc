@@ -29,7 +29,7 @@ export HISTCONTROL=ignoreboth     # Ignore dupes and commands starting with spac
 # Colours
 # --------------------------
 
-[ -f ~/.bash_colors ] && source ~/.bash_colors
+[ -f "$HOME/.bash_colors" ] && source "$HOME/.bash_colors"
 
 # --------------------------
 # Prompt
@@ -90,8 +90,9 @@ alias ls='ls --color=auto'
 alias ll='ls -lh --color=auto'
 alias la='ls -A --color=auto'
 alias l='ls -CF --color=auto'
+alias grep='grep --color=auto -n'
 
-alias bat="batcat"
+alias bat='batcat'
 alias vimdiff='nvim -d'
 alias vim='nvim'
 
