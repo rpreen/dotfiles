@@ -90,7 +90,7 @@ alias ls='ls --color=auto'
 alias ll='ls -lh --color=auto'
 alias la='ls -A --color=auto'
 alias l='ls -CF --color=auto'
-alias grep='grep --color=auto -n'
+alias grep='grep --color=auto'
 
 alias bat='batcat'
 alias vimdiff='nvim -d'
