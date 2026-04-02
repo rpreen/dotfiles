@@ -31,6 +31,7 @@ sudo apt install -y kitty
 sudo apt install -y nodejs npm
 sudo apt install -y openssh-client sshfs
 sudo apt install -y pavucontrol
+sudo apt install -y pdfgrep
 sudo apt install -y python-is-python3 python3-dev python3-pip python3-tk
 sudo apt install -y ripgrep
 sudo apt install -y rsync
