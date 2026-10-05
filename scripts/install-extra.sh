@@ -23,7 +23,7 @@ echo "Installing to $BIN_DIR/"
 # FZF - apt package is old (v0.44.1)
 ####################################################
 
-FZF_VER="0.67.0"
+FZF_VER="0.74.4"
 
 echo "Downloading fzf..."
 curl -fL --progress-bar "https://github.com/junegunn/fzf/releases/download/v$FZF_VER/fzf-$FZF_VER-linux_amd64.tar.gz" | tar xz
@@ -36,7 +36,7 @@ mv fzf "$BIN_DIR/"
 # fd - apt package is old (v9.0.0)
 ####################################################
 
-FD_VER="10.3.0"
+FD_VER="10.5.0"
 
 echo "Downloading fd..."
 curl -fL --progress-bar "https://github.com/sharkdp/fd/releases/download/v$FD_VER/fd-v$FD_VER-x86_64-unknown-linux-musl.tar.gz" | tar xz
@@ -53,7 +53,7 @@ rm -rf tmp
 # ripgrep - apt package is old (14.1.0)
 ####################################################
 
-RG_VER="15.1.0"
+RG_VER="15.2.0"
 
 echo "Downloading ripgrep..."
 curl -fL --progress-bar "https://github.com/BurntSushi/ripgrep/releases/download/$RG_VER/ripgrep-$RG_VER-x86_64-unknown-linux-musl.tar.gz" | tar xz
@@ -70,7 +70,7 @@ rm -rf tmp
 # resvg - not available in apt - yazi svg rendering
 ####################################################
 
-RESVG_VER="0.47.0"
+RESVG_VER="0.48.1"
 
 echo "Downloading resvg..."
 curl -fL --progress-bar "https://github.com/linebender/resvg/releases/download/v$RESVG_VER/resvg-linux-x86_64.tar.gz" | tar xz
@@ -83,10 +83,10 @@ mv resvg "$BIN_DIR/"
 # imagemagick - apt package is old (v6.9.12)
 ####################################################
 
-IM_VER="7.1.2-16"
+IM_VER="7.1.2-32"
 
 echo "Downloading imagemagick..."
-curl -fL --progress-bar -o "magick" "https://github.com/ImageMagick/ImageMagick/releases/download/$IM_VER/ImageMagick-70563ce-gcc-x86_64.AppImage"
+curl -fL --progress-bar -o "magick" "https://github.com/ImageMagick/ImageMagick/releases/download/$IM_VER/ImageMagick-$IM_VER-gcc-x86_64.AppImage"
 
 echo "Installing imagemagick..."
 chmod +x magick
