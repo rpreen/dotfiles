@@ -38,7 +38,7 @@ sudo apt install -y ripgrep
 sudo apt install -y rsync
 sudo apt install -y stow
 sudo apt install -y synaptic
-sudo apt install -y texlive texlive-latex-extra texlive-fonts-extra texlive-science
+sudo apt install -y texlive texlive-latex-extra texlive-fonts-extra texlive-science texlive-extra-utils
 sudo apt install -y tmux
 sudo apt install -y totem vlc
 sudo apt install -y ttf-mscorefonts-installer
