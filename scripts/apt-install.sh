@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ####################################################
-# Install apt packages for Ubuntu GNU/Linux 24.04.3
+# Install apt packages for Ubuntu GNU/Linux 26.04.1
 # Usage: ./apt-install.sh
 #
 # Note: this list is not complete.
@@ -9,6 +9,7 @@
 
 sudo apt update
 
+sudo apt install -y apparmor-utils apparmor-profiles-extra
 sudo apt install -y aspell aspell-en
 sudo apt install -y bash-completion
 sudo apt install -y bat
@@ -48,9 +49,12 @@ sudo apt install -y zoxide
 # gnome
 ####################################################
 
-# Extensions:
+# Extensions (24.04.3):
 #  Just Perfection - just-perfection-desktop@just-perfection
 #  System Monitor - system-monitor@gnome-shell-extensions.gcampax.github.com
+# Extensions (26.04.1):
+#  moveclock - moveclock@kuvaus.org
+#  System Monitor (modified css/js) - system-monitor-panel@naimur
 sudo apt install -y gnome-shell-extension-appindicator
 sudo apt install -y gnome-shell-extension-manager
 sudo apt install -y gnome-tweaks
@@ -59,7 +63,7 @@ sudo apt install -y gnome-tweaks
 # yazi - not available in apt
 ####################################################
 
-YAZI_VER="26.1.22"
+YAZI_VER="26.9.1"
 YAZI_DEB="yazi-x86_64-unknown-linux-musl.deb"
 
 curl -fL --progress-bar -O "https://github.com/sxyazi/yazi/releases/download/v$YAZI_VER/$YAZI_DEB"
