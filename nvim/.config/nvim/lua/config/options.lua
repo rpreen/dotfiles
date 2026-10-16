@@ -51,7 +51,7 @@ vim.opt.virtualedit = "all"
 vim.opt.whichwrap:append("<>[]hl")
 
 -- System
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = ""
 vim.opt.encoding = "utf-8"
 vim.opt.hidden = true
 vim.opt.updatetime = 250
